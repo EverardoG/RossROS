@@ -52,7 +52,7 @@ def ensureTuple(value):
     """
     Function that wraps an input value in a tuple if it is not already a tuple
     """
-    
+
     if isinstance(value, tuple):
         value_tuple = value
     else:
@@ -326,5 +326,6 @@ def runConcurrently(producer_consumer_list):
             executor_list.append(executor.submit(cp))
 
     # Loop over the executors that were created above, running their result methods
-    for e in executor_list:
+    for e, cp in zip(executor_list, producer_consumer_list):
+        logging.info(cp.name + " Result:")
         e.result()
